@@ -198,7 +198,7 @@ const HomePage = () => {
 
           <button
             onClick={() => setShowCategoryModal(true)}
-            className="border px-6 py-2 text-xs hover:bg-red-500 hover:text-white"
+            className="border px-6 py-2 text-xs hover:bg-black hover:text-white"
           >
             Manage category
           </button>
