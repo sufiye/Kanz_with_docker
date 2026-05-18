@@ -16,7 +16,7 @@ export const refreshTokens = async () => {
     }
 
     const response = await axios.post(
-      "http://localhost:5064/api/Auth/refreshToken",
+      "http://localhost:8080/api/Auth/refreshToken",
       {
         refreshToken: refreshToken,
       }

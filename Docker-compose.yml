@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  frontend:
+    image: sufiye/kanzfrontend
+    ports:
+      - "8000:8000"
+
+  backend:
+    image: sufiye/kanzapi
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sqlserver
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__KanzConnectionString=Server=sqlserver;Database=KanzDb;User Id=sa;Password=YourStrong@Pass123;TrustServerCertificate=True;
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Pass123
+    ports:
+      - "1433:1433"
