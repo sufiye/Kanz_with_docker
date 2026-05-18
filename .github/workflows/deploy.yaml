@@ -2,13 +2,13 @@ name: kanz website deployment
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build-and-deploy:
     strategy:
       matrix:
-        node-version: ["22"]
+        node-version: ["24.15.0"]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
 
