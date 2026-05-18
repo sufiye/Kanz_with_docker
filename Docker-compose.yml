@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   frontend:
     image: sufiye/kanzfrontend
@@ -17,9 +15,9 @@ services:
       - ConnectionStrings__KanzConnectionString=Server=sqlserver;Database=KanzDb;User Id=sa;Password=YourStrong@Pass123;TrustServerCertificate=True;
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourStrong@Pass123
-    ports:
-      - "1433:1433"
+   image: mcr.microsoft.com/mssql/server:2022-latest
+   environment:
+     - ACCEPT_EULA=Y
+     - MSSQL_SA_PASSWORD=YourStrong@Pass123
+   ports:
+     - "1433:1433"
