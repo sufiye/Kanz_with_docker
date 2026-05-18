@@ -201,7 +201,7 @@ const HomePage = () => {
             onClick={() => setShowCategoryModal(true)}
             className="border px-6 py-2 text-xs hover:bg-green-500 hover:text-white"
           >
-            suif kategory
+            Manage kategory
           </button>
         </div>
       )}
