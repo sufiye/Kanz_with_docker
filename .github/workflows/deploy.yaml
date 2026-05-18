@@ -2,28 +2,23 @@ name: kanz website deployment
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: ["24.25.0"]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
+        - name: Clone repository
+          uses: actions/checkout@v6
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
+        - name: Install Node.js ${{matrix.node-version}}
+          uses: actions/setup-node@v6
+          with:
+            node-version: ${{ matrix.node-version }}
+          
