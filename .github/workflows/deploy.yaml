@@ -78,7 +78,7 @@ jobs:
             key: ${{ secrets.EC2_SSH_KEY }}
             port: 22
             script: |
-              if [ ! -d "Kanz_with_docker/.git"]; then
+              if [ ! -d "Kanz_with_docker/.git" ]; then
               git clone https://github.com/sufiye/Kanz_with_docker.git
               fi
 
