@@ -3,6 +3,9 @@ name: kanz website deployment
 on:
   push:
     branches: [ master ]
+env:
+  REGISTRY: gchr.io
+  image: ${{ github.repository }}
 
 jobs:
 
@@ -26,7 +29,9 @@ jobs:
           working-directory: ./
           run: npm install
 
-  build-and-deploy:
+  build-and-push-dockerhub:
+
+    needs: test
     strategy:
       matrix:
         node-version: ["24.15.0"]
@@ -46,3 +51,41 @@ jobs:
           run: |
             docker build -t ${{ secrets.DOCKER_USERNAME }}/kanzfrontend .
             docker push ${{ secrets.DOCKER_USERNAME }}/kanzfrontend
+
+  deploy-project-toEc2:
+    needs: build-and-push-dockerhub
+    strategy:
+      matrix:
+        node-version: ["24.15.0"]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+
+        - name: ec2 deploy
+          uses: appleboy/ssh-action@v1
+          with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USER }}
+            key: ${{ secrets.EC2_SSH_KEY }}
+            
+
+        - name: Deploy to EC2
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USER }}
+            key: ${{ secrets.EC2_SSH_KEY }}
+            port: 22
+            script: |
+              if [! -d "Kanz_with_docker/.git"] then;
+              git clone https://github.com/sufiye/Kanz_with_docker.git
+              fi
+
+              cd Kanz_with_docker
+              git pull origin master
+              docker-compose pull
+              docker-compose down
+              docker-compose up -d
+              docker image prune -f
+  
