@@ -1,0 +1,22 @@
+name: kanz website deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    strategy:
+      matrix:
+        node-version: ["24.25.0"]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+        - name: Clone repository
+          uses: actions/checkout@v6
+        - name: Install Node.js ${{matrix.node-version}}
+          uses: actions/setup-node@v6
+          with:
+            node-version: ${{ matrix.node-version }}
+          
