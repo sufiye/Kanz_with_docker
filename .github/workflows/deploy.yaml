@@ -8,7 +8,7 @@ jobs:
   build-and-deploy:
     strategy:
       matrix:
-        node-version: ["24.25.0"]
+        node-version: ["24.15.0"]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
 
