@@ -3,7 +3,7 @@ import { useTokens } from "../stores/tokenStore.js";
 import { refreshTokens } from "./utils.js";
 
 const api = axios.create({
-  baseURL: "",
+  baseURL: "/api",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
