@@ -111,7 +111,6 @@ const HomePage = () => {
     setCategories(normalizeArray(res.data));
   };
 
-
   const addProduct = async () => {
     try {
       const formData = new FormData();
@@ -222,27 +221,46 @@ const HomePage = () => {
             <input
               placeholder="Name"
               className="border p-2 w-full"
+              value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
 
             <input
               placeholder="Title"
               className="border p-2 w-full"
+              value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
             />
 
             <textarea
               placeholder="Description"
               className="border p-2 w-full"
+              value={form.description}
               onChange={(e) =>
                 setForm({ ...form, description: e.target.value })
               }
             />
 
+            <select
+              className="border p-2 w-full"
+              value={form.categoryId}
+              onChange={(e) =>
+                setForm({ ...form, categoryId: e.target.value })
+              }
+            >
+              <option value="">Select Category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+
             <input
               type="number"
               placeholder="Price"
               className="border p-2 w-full"
+              value={form.price}
               onChange={(e) => setForm({ ...form, price: e.target.value })}
             />
 
@@ -250,6 +268,7 @@ const HomePage = () => {
               type="number"
               placeholder="Stock"
               className="border p-2 w-full"
+              value={form.stockCount}
               onChange={(e) =>
                 setForm({ ...form, stockCount: e.target.value })
               }
