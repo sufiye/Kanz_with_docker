@@ -129,7 +129,7 @@ const Login = () => {
             className="w-full border py-3 text-sm tracking-wide transition
                         hover:bg-black hover:text-white"
           >
-            LOGIN
+            LOGI
           </button>
         </div>
       </div>
