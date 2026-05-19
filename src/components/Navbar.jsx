@@ -212,7 +212,7 @@ const Navbar = ({
               }}
               className="border px-4 py-2 text-xs"
             >
-              SIGN IN
+              SIGN I
             </button>
           )}
         </div>
